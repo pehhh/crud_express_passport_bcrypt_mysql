@@ -1,0 +1,43 @@
+<%- include('../partials/header'); %>
+<%- include('../partials/navigation'); %>
+
+    <div class="container p-4">
+        <div class="row">
+            <% if(data.length!=0){ %>
+                <% for (let i=0; i < data.length; i++){ %>
+                    <div class="col-md-3">
+                        <div class="card text-center bg-dark text-light">
+                            <div class="card-body">
+                                <a href="<%= data[i].url %>" target="_blank" class="text-light">
+                                    <h3 class="card-title text-uppercase">
+                                        <%= data[i].title %>
+                                    </h3>
+                                </a>
+                                <p class="m-2">
+                                    <%= data[i].description %>
+                                </p>
+                                <p class="text-muted">
+                                    <%- helpers.timeago(data[i].created_at); %>
+                                </p>
+                                <a class="btn btn-danger" href="/links/delete/<%= data[i].id %>">
+                                    Delete Link
+                                </a>
+                                <a class="btn btn-secondary" href="/links/edit/<%= data[i].id %>">
+                                    Edit
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+            <% }else{ %>
+                <div class="col-md-4 mx-auto">
+                    <div class="card card-body text-center bg-dark text-light">
+                        <p>There are not Links saved yet.</p>
+                        <a href="/links/add" class="text-success">Create One!</a>
+                    </div>
+                </div>
+                <% } %>
+        </div>
+        
+    </div>
+    <%- include('../partials/footer'); %>
